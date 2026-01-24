@@ -10,11 +10,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Router from '@/router';
-import Fallback from './components/Fallback/Fallback';
 
 import { ToastContainer } from 'react-toastify';
 
 import '@/utils/i18n';
+import ErrorFallback from './components/ErrorFallback';
+import Fallback from './components/Fallback';
 
 const queryClient = new QueryClient({
   defaultOptions: {
