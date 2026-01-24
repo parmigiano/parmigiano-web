@@ -1,5 +1,11 @@
 {
-    "label": {
-        "web-title": "ParmigianoChat Web"
-    }
+	"label": {
+		"web-title": "ParmigianoChat Web",
+        "next": "Дальше"
+	},
+	"message": {
+        "signin-parmigiano": "Войдите в систему Parmigiano",
+		"signin-email-desc": "Введите email вашего аккаунта. Если аккаунта не существует, мы создадим его автоматически.",
+		"please-wait": "Пожалуйста подождите"
+	}
 }

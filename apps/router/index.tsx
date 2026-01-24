@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAuthState } from '@/private-route';
-import config, { CustomRouteConfig } from './config';
+import config from './config';
+import type { CustomRouteConfig } from './config';
 import { ROUTES } from '@/constants/constants';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
