@@ -3,7 +3,7 @@ import type { JSX, LazyExoticComponent } from 'react';
 import { ROUTES } from '@/constants/constants';
 
 /* Auth */
-const Login = lazy(() => import('@/pages/LPage/index'));
+const Auth = lazy(() => import('@/pages/AuthPage/index'));
 
 const Chat = lazy(() => import('@/pages/ChatPage/index'));
 
@@ -18,10 +18,10 @@ export interface CustomRouteConfig {
 const config: CustomRouteConfig[] = [
 	/* Login */
 	{
-		path: ROUTES.LOGIN,
+		path: ROUTES.AUTH,
 		loginRequired: false,
 		redirectIfLogged: true,
-		component: Login,
+		component: Auth,
 		title: 'label.web-title',
 	},
 	/* Chat */

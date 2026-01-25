@@ -1,11 +1,40 @@
 {
 	"label": {
 		"web-title": "ParmigianoChat Web",
-        "next": "Дальше"
+		"next": "Дальше",
+		"skip": "Пропустить",
+		"cloud-password": "Облачный пароль",
+		"email": "Электронная почта",
+		"verify-code": "Подтверждающий код",
+		"name": "Имя",
+		"username": "Имя пользователя"
 	},
 	"message": {
-        "signin-parmigiano": "Войдите в систему Parmigiano",
+		"signin-parmigiano": "Войдите в систему Parmigiano",
+		"create-account-parmigiano": "Создайте учетную запись в Parmigiano",
 		"signin-email-desc": "Введите email вашего аккаунта. Если аккаунта не существует, мы создадим его автоматически.",
-		"please-wait": "Пожалуйста подождите"
+		"please-wait": "Пожалуйста подождите",
+		"send-verify-code-desc": "Мы отправили код подтверждения на вашу электронную почту. Пожалуйста, введите полученный код ниже, чтобы продолжить.",
+		"validation-required-field": "Это поле является обязательным",
+		"validation-password-min-length": "Пароль должен содержать не менее 8 символов",
+		"validation-password-max-length": "Пароль не должен превышать 16 символов",
+		"validation-email-invalid": "Неверный формат электронной почты",
+		"validation-phone-length": "Номер телефона должен содержать не менее 8 символов",
+		"validation-name-min-length": "Имя должно содержать не менее 2 символов",
+		"validation-name-max-length": "Имя не должно превышать 24 символов",
+		"validation-username-min-length": "Имя пользователя должно содержать не менее 4 символов",
+		"validation-username-max-length": "Имя пользователя не должно превышать 24 символов",
+		"cloud-password-required": "Для входа в аккаунт требуется облачный пароль. Введите его ниже.",
+		"server-error": "ошибка на сервере",
+		"request-error": "ошибка при отправки запроса",
+		"unknown-request-error": "неизвестная ошибка запроса",
+		"try-again-error": "произошла ошибка. пожалуйста, попробуйте снова",
+		"internet-error": "Ошибка сети. Попробуйте снова.",
+		"auth-meta-description": "Войдите в аккаунт, чтобы получить доступ к чатам.",
+		"auth-og-title": "Страница авторизации.",
+		"auth-og-description": "Войдите в аккаунт ParmigianoChat и используйте все функции.",
+		"online-meta-description": "Просматривайте и общайтесь с вашими контактами в режиме онлайн.",
+		"online-og-title": "Страница чатов.",
+		"online-og-description": "Все ваши чаты с пользователями в одном месте. Общайтесь онлайн быстро и удобно."
 	}
 }

@@ -7,7 +7,20 @@ input
     width: 100%
 
     &:focus
-        border: 1px solid #2c00ff
+        border: 1px solid #1C75A9
 
     &:hover
-        border: 1px solid #2c00ff
+        border: 1px solid #1C75A9
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill
+    -webkit-box-shadow: 0 0 0px 1000px #212121 inset !important
+    box-shadow: 0 0 0px 1000px #212121 inset !important
+
+    -webkit-text-fill-color: #ffffff !important
+    caret-color: #ffffff !important
+
+    transition: background-color 9999s ease-in-out 0s

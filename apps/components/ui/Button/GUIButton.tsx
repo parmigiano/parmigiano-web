@@ -1,31 +1,55 @@
-import Load from "@/components/Loader/Load";
-import { useState } from "react";
+import Load from '@/components/Loader/Load';
+import { useState } from 'react';
 
 interface GUIButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    onClick?: () => Promise<void> | void;
+	onClick?: () => Promise<void> | void;
+	type?: 'button' | 'submit' | 'reset';
 }
 
-const GUIButton: React.FC<GUIButtonProps> = ({ disabled, children, className, onClick, ...props }) => {
-    const [loading, setLoading] = useState<boolean>(false);
+const GUIButton: React.FC<GUIButtonProps> = ({ disabled, children, className, onClick, type = 'button', ...props }) => {
+	const [loading, setLoading] = useState<boolean>(false);
 
-    const handleClick = async () => {
-        if (loading || !onClick) return;
+	const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (loading) return;
 
-        try {
-            setLoading(true);
-            await onClick();
-        } finally {
-            setLoading(false);
-        }
-    };
+		if (onClick) {
+			try {
+				setLoading(true);
+				await onClick();
+			} finally {
+				setLoading(false);
+			}
+		}
+	};
 
-    return (
-        <div className="flex justify-end items-center">
-            <button {...props} id="button" className={`${className} ${loading && '!opacity-50 !cursor-default'}`} disabled={disabled || loading} onClick={handleClick}>
-                {loading ? <Load /> : children}
-            </button>
-        </div>
-    )
-}
+	return (
+		<div className="flex justify-end items-center">
+			<button
+				{...props}
+				type={type}
+				id="button"
+				className={`${className} ${loading && '!opacity-50 !cursor-default'}`}
+				disabled={disabled || loading}
+				onClick={
+					type === 'submit'
+						? async (e) => {
+								e.preventDefault();
+								if (onClick) {
+									try {
+										setLoading(true);
+										await onClick();
+									} finally {
+										setLoading(false);
+									}
+								}
+							}
+						: handleClick
+				}
+			>
+				{loading ? <Load /> : children}
+			</button>
+		</div>
+	);
+};
 
-export default GUIButton
+export default GUIButton;

@@ -1,7 +1,5 @@
 const Fallback = () => {
-    return (
-        <div>Fallback</div>
-    )
-}
+	return <div>Fallback</div>;
+};
 
-export default Fallback
+export default Fallback;

@@ -17,44 +17,35 @@ import ErrorFallback from './components/ErrorFallback';
 import Fallback from './components/Fallback';
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 30,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: true,
-      refetchOnMount: true,
-    },
-  },
+	defaultOptions: {
+		queries: {
+			staleTime: 1000 * 30,
+			refetchOnWindowFocus: false,
+			refetchOnReconnect: true,
+			refetchOnMount: true,
+		},
+	},
 });
 
 const App = () => {
-  return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
-      <Suspense fallback={<Fallback />}>
-        <Router />
-      </Suspense>
-    </ErrorBoundary>
-  );
+	return (
+		<ErrorBoundary fallback={<ErrorFallback />}>
+			<Suspense fallback={<Fallback />}>
+				<Router />
+			</Suspense>
+		</ErrorBoundary>
+	);
 };
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <ToastContainer
-          position="top-center"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={true}
-          closeButton={true}
-          theme="light"
-          limit={3}
-        />
-        <App />
+	<BrowserRouter>
+		<HelmetProvider>
+			<QueryClientProvider client={queryClient}>
+				<ToastContainer position="top-center" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick={true} closeButton={true} theme="dark" limit={3} />
+				<App />
 
-        <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
-    </HelmetProvider>
-  </BrowserRouter>
+				<ReactQueryDevtools initialIsOpen={true} />
+			</QueryClientProvider>
+		</HelmetProvider>
+	</BrowserRouter>
 );

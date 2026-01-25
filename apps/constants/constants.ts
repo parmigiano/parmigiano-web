@@ -1,7 +1,7 @@
 export const ROUTES = {
 	CHAT: '/online',
 	NOT_FOUND: '*',
-	LOGIN: '/l',
+	AUTH: '/l',
 };
 
 type Params = Record<string, string | number>;

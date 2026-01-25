@@ -1,11 +1,40 @@
 {
 	"label": {
 		"web-title": "ParmigianoChat Web",
-		"next": "Next"
+		"next": "Next",
+		"skip": "Skip",
+		"cloud-password": "Cloud password",
+		"email": "Email",
+		"verify-code": "Verification code",
+		"name": "Name",
+		"username": "Username"
 	},
 	"message": {
 		"signin-parmigiano": "Sign in to Parmigiano",
+		"create-account-parmigiano": "Create an account",
 		"signin-email-desc": "Enter your account email. If your account doesn't exist, we'll create it automatically.",
-		"please-wait": "Please wait"
+		"please-wait": "Please wait",
+		"send-verify-code-desc": "We have sent a confirmation code to your email. Please enter the code below to continue.",
+		"validation-required-field": "This field is required",
+		"validation-password-min-length": "Password must contain at least 8 characters",
+		"validation-password-max-length": "Password must not exceed 16 characters",
+		"validation-email-invalid": "Invalid email address",
+		"validation-phone-length": "Phone number must be at least 8 characters long",
+		"validation-name-min-length": "Name must contain at least 2 characters",
+		"validation-name-max-length": "Name must not exceed 24 characters",
+		"validation-username-min-length": "Username must contain at least 4 characters",
+		"validation-username-max-length": "Username must not exceed 24 characters",
+		"cloud-password-required": "A cloud password is required to log in to your account. Enter it below.",
+		"server-error": "server error",
+		"request-error": "error sending request",
+		"unknown-request-error": "unknown request error",
+		"try-again-error": "an error occurred. please try again",
+		"internet-error": "Network error. Try again.",
+		"auth-meta-description": "Sign in to access the chats.",
+		"auth-og-title": "Login Page.",
+		"auth-og-description": "Sign in to your account and use all features.",
+		"online-meta-description": "View and chat with your contacts online.",
+		"online-og-title": "Chats Page.",
+		"online-og-description": "All your chats with users in one place. Chat online quickly and easily."
 	}
 }
