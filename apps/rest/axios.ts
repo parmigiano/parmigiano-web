@@ -4,51 +4,48 @@ import { toast } from 'react-toastify';
 import axios, { AxiosError } from 'axios';
 import { config } from '@/.config/config.client';
 import { CACHEKEYs } from '@/constants/CacheKeys.constants';
+import { ROUTES } from '@/constants/constants';
 
-// axios base url
 const axiosClient = axios.create({
-	baseURL: config.type.release == 'dev' ? config.links.URL_BACKEND_DEV : config.links.URL_BACKEND_PROD,
+	baseURL: config.api.URL_BACKEND,
 	paramsSerializer: (params) => Qs.stringify(params, { arrayFormat: 'comma' }),
 });
 
-// axios helper for request
 axiosClient.interceptors.request.use(
-	(config) => {
-		const currentLanguage = i18next.language || 'en';
-		config.headers['Accept-Language'] = currentLanguage;
+	(request) => {
+		request.headers['Accept-Language'] = i18next.language || 'en';
 
-		return config;
+		const session = localStorage.getItem(CACHEKEYs.L_SESSION);
+		if (session) {
+			request.headers.Authorization = `Bearer ${session}`;
+		}
+
+		return request;
 	},
 	(error) => Promise.reject(error)
 );
 
-// axios helper for response
 axiosClient.interceptors.response.use(
-	(response) => {
-		return response;
-	},
+	(response) => response,
 	async (error) => {
 		if (axios.isCancel(error) || error.code === 'ERR_CANCELED') {
 			return Promise.reject(error);
 		}
 
-		// internet
-		if (error.message === 'Network Error' || error.code === 'ERR_NETWORK' || error.message.includes('Network request failed')) {
+		if (error.message === 'Network Error' || error.code === 'ERR_NETWORK' || error.message?.includes('Network request failed')) {
 			toast.error(i18next.t('message.internet-error'));
 			return Promise.reject(error);
 		}
 
 		if (error instanceof AxiosError) {
-			if (error.response && error.response.status) {
-				if (error.response.status === 401) {
-					try {
-						localStorage.removeItem(CACHEKEYs.L_SESSION);
-					} catch (e) {
-						console.error(e);
-					}
-				} else {
-					toast.error(error.response.data?.error || i18next.t('message.server-error'));
+			if (error.response?.status === 401) {
+				localStorage.removeItem(CACHEKEYs.L_SESSION);
+				if (window.location.pathname !== ROUTES.AUTH) {
+					window.location.replace(ROUTES.AUTH);
 				}
+			} else if (error.response?.status) {
+				const responseData = error.response.data as { error?: string; message?: string } | undefined;
+				toast.error(responseData?.error || responseData?.message || i18next.t('message.server-error'));
 			} else if (error.request) {
 				toast.error(i18next.t('message.request-error'));
 			} else {

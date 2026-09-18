@@ -7,42 +7,55 @@ import { ROUTES } from '@/constants/constants';
 
 interface AuthStepVerifyCodeProps {
 	email: string;
+	onNext: (step: 'password' | 'register') => void;
+	onBack: () => void;
 }
 
-const AuthStepVerifyCode: React.FC<AuthStepVerifyCodeProps> = ({ email }) => {
+const AuthStepVerifyCode: React.FC<AuthStepVerifyCodeProps> = ({ email, onNext, onBack }) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const [code, setCode] = useState('');
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [isVerifying, setIsVerifying] = useState(false);
 
-	const [code, setCode] = useState<string>('');
-	const [isSuccess, setIsSuccess] = useState<boolean>(false);
-	const [isError, setIsError] = useState<boolean>(false);
+	const handleVerify = async (finalCode: string) => {
+		if (isVerifying) return;
+		setIsVerifying(true);
 
-	const handleVerify = async (fcode: string) => {
 		try {
-			await basicAuthVerifyCode({ email, code: Number(fcode) });
-
-			setIsSuccess(true);
+			const result = await basicAuthVerifyCode({ email, code: Number(finalCode) });
+			setIsSuccess(result === 'authenticated');
 			setIsError(false);
 
-			setTimeout(() => {
-				navigate(ROUTES.CHAT);
-			}, 1500);
+			if (result === 'authenticated') {
+				navigate(ROUTES.CHAT, { replace: true });
+				return;
+			}
+
+			onNext(result);
 		} catch {
 			setIsSuccess(false);
 			setIsError(true);
+			setCode('');
+		} finally {
+			setIsVerifying(false);
 		}
 	};
 
 	return (
-		<div className="w-[26rem] text-center space-y-8">
-			<img src="/logo-bg-none.png" width={200} className="mx-auto" />
-
+		<div className="space-y-7 text-center">
 			<div className="space-y-2">
-				<p className="font-medium text-[1.75rem]">{email}</p>
-				<p className="text-[#999]">{t('message.send-verify-code-desc')}</p>
+				<p className="text-[1.55rem] font-semibold">{email}</p>
+				<p className="text-sm leading-6 text-[#8b9bad]">{t('message.send-verify-code-desc')}</p>
 			</div>
 
-			<CodeInput value={code} onChange={setCode} onComplete={(fcode: string) => handleVerify(fcode)} success={isSuccess} error={isError} />
+			<CodeInput value={code} onChange={setCode} onComplete={handleVerify} success={isSuccess} error={isError} />
+			{isVerifying && <p className="text-sm text-[#8b9bad]">{t('message.please-wait')}</p>}
+
+			<button type="button" onClick={onBack} className="text-sm font-medium text-[#5aa7e8] hover:text-[#76b8ef]">
+				{t('label.change-email')}
+			</button>
 		</div>
 	);
 };
